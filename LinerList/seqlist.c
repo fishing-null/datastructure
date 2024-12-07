@@ -1,5 +1,6 @@
 #include<stdio.h>
 #define MAXSIZE 100
+#include<stdlib.h>
 
 typedef int ElementType;
 
@@ -11,11 +12,14 @@ typedef struct
     int length;
 
     // a container to store elements
-    ElementType data[MAXSIZE];
+    ElementType *data;
 } Seqlist;
 
-void initList(Seqlist *L){
+Seqlist* initList(){
+    Seqlist *L = (Seqlist*)malloc(sizeof(Seqlist));
+    L -> data = (ElementType*)malloc(sizeof(ElementType)*MAXSIZE);
     L -> length = 0;
+    return L;
 }
 int appenElem(Seqlist *L,ElementType element){
     //append an element in the seqlist's end,return 1 if success else 0
@@ -73,26 +77,9 @@ int findElem(Seqlist *L,ElementType e){
     return 0;
 }
 int main(int argc,char const *rgv[]){
-    Seqlist list;
-    initList(&list);
-
-    printf("init the seqlist,the length of the list's %d\n",list.length);
-    printf("the seqlist use %zu bytes memory\n",sizeof(list));
-    appenElem(&list, 567);
-    appenElem(&list, 67);
-    appenElem(&list, 56);
-    appenElem(&list, 565);
-    printf("after append one element, the length of the list's %d\n",list.length);
-
-
-    listElem(&list);
-    printf("insert 53 in index 2\n");
-    insertElem(&list,3,53);
-    listElem(&list);
-    deleteElem(&list, 2);
-    listElem(&list);
-
-    int n = findElem(&list,67);
-    printf("%d\n",n);
+    Seqlist *list = initList();
+    appenElem(list,33);
+    appenElem(list,21);
+    listElem(list);
     return 0;
 }
