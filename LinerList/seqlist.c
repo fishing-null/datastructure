@@ -76,7 +76,7 @@ int findElem(Seqlist *L,ElementType e){
     }
     return 0;
 }
-int main(int argc,char const *rgv[]){
+int main(int argc,char const *argv[]){
     Seqlist *list = initList();
     appenElem(list,33);
     appenElem(list,21);
