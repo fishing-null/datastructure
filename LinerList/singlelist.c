@@ -44,11 +44,24 @@ void insertTail(Node *head,ElementType e){
     cur -> next = NULL;
 }
 
+void insertIndex(Node *head,int pos,ElementType e){
+    //find the prev Node
+    Node *prev = head;
+    int count = 0;
+    while(count < pos - 1 && prev != NULL){
+        prev = prev -> next;
+    }
+    Node *cur = (Node*)malloc(sizeof(Node));
+    cur -> data = e;
+    cur -> next = prev -> next;
+    prev -> next = cur;
+}
 int main(int argc,char const *argv){
     Node *N = initList();
     insertHead(N,53);
     insertHead(N,63);
     insertHead(N,72);
     insertTail(N,62);
+    insertIndex(N,0,234);
     list(N);
 }
