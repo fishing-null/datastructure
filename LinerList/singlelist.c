@@ -48,13 +48,47 @@ void insertIndex(Node *head,int pos,ElementType e){
     //find the prev Node
     Node *prev = head;
     int count = 0;
-    while(count < pos - 1 && prev != NULL){
+    while(count < pos - 1 && prev -> next != NULL){
         prev = prev -> next;
     }
     Node *cur = (Node*)malloc(sizeof(Node));
     cur -> data = e;
     cur -> next = prev -> next;
     prev -> next = cur;
+}
+
+void deleteIndex(Node *head,int pos){
+    Node *prev = head;
+    int count = 0;
+    while(count < pos-1 && prev -> next != NULL){
+        prev = prev -> next;
+        count++;
+    }
+    //skip the node
+    if(prev -> next != NULL){
+        Node *cur = prev -> next;
+        prev -> next = cur -> next;
+        free(cur);
+    }
+}
+int listLength(Node *head){
+    int count = 0;
+    Node *p = head;
+    while(p != NULL){
+        p = p -> next;
+        count++;
+    }
+    return count;
+}
+void freeList(Node *head){
+    Node *p = head;
+    Node *q;
+    while(p != NULL){
+        q = p -> next;
+        free(p);
+        p = q;
+    }
+    head -> next = NULL;
 }
 int main(int argc,char const *argv){
     Node *N = initList();
@@ -64,4 +98,13 @@ int main(int argc,char const *argv){
     insertTail(N,62);
     insertIndex(N,0,234);
     list(N);
+    deleteIndex(N,3);
+    list(N);
+    int length = listLength(N);
+    printf("The seqlists' length is %d\n",length);
+    printf("free the seqlist\n");
+    freeList(N);
+    list(N);
+    length = listLength(N);
+    printf("The seqlists' length is %d\n",length);
 }
