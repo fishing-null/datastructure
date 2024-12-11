@@ -91,7 +91,7 @@ void freeList(Node *head){
     }
     head -> next = NULL;
 }
-int main(int argc,char const *argv){
+int main(int argc,char const *argv[]){
     Node *N = initList();
     insertHead(N,53);
     insertHead(N,63);
