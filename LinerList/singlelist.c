@@ -84,6 +84,7 @@ void freeList(Node *head){
     Node *p = head;
     Node *q;
     while(p != NULL){
+        //save the next node
         q = p -> next;
         free(p);
         p = q;
