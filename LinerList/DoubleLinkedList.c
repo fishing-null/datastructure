@@ -41,6 +41,48 @@ void insertTail(Node* L,ElementType e){
     tail->next = cur;
     cur->next = NULL;
 }
+
+void insertIndex(Node* L,int pos,ElementType e){
+    Node* prev = L;
+    //find the prev node
+    int count = 0;
+    while(count < pos - 1 && prev != NULL){
+        prev = prev->next;
+        count++;
+    }
+    Node* cur = (Node *)malloc(sizeof(Node));
+    cur -> data = e;
+    cur -> next = prev -> next;
+    cur -> prev = prev;
+    //if prev->next != NULL,update the pointer
+    if(prev -> next != NULL){
+        prev -> next-> prev = cur;
+    }
+    prev -> next = cur;
+}
+
+void deleteIndex(Node* L,int pos){
+    Node *prev = L;
+    int count = 0;
+    //find the prev node
+    while(count < pos - 1){
+        prev = prev->next;
+        count++;
+        if(prev == NULL){
+            return;
+        }
+    }
+    //ensure the deleted node is exist
+    if(prev->next == NULL){
+        printf("The node is not exist\n");
+        return;
+    }
+    Node *cur = prev->next;
+    prev->next = cur->next;
+    cur->next->prev = prev;
+    free(cur);
+}
+
 void listNode(Node* L){
     Node* cur = L -> next;
     while(cur != NULL){
@@ -65,5 +107,10 @@ int main(int argc,char const *argv[]){
     insertTail(L,13);
     insertTail(L,12);
     insertTail(L,23);
+    listNode(L);
+    insertIndex(L,9,999);
+    listNode(L);
+    printf("Delete index 4\n");
+    deleteIndex(L,4);
     listNode(L);
 }
