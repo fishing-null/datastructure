@@ -93,6 +93,26 @@ void listNode(Node* L){
     printf("NULL\n");
 }
 
+int listLength(Node* L){
+    Node* cur = L -> next;
+    int count = 0;
+    while(cur != NULL){
+        count++;
+        cur = cur -> next;
+    }
+    return count;
+}
+void freeList(Node* L){
+    Node* cur = L;
+    while (cur != NULL)
+    {
+        Node *next = cur -> next;
+        free(cur);
+        cur = next;
+    }
+    L -> next = NULL;
+}
+
 int main(int argc,char const *argv[]){
     Node *L = initList();
     printf("InsertHead\n");
@@ -108,9 +128,14 @@ int main(int argc,char const *argv[]){
     insertTail(L,12);
     insertTail(L,23);
     listNode(L);
-    insertIndex(L,9,999);
+    insertIndex(L,10,999);
     listNode(L);
     printf("Delete index 4\n");
     deleteIndex(L,4);
+    listNode(L);
+    int length = listLength(L);
+    printf("The list's length is %d\n",length);
+    printf("free the list\n");
+    freeList(L);
     listNode(L);
 }
