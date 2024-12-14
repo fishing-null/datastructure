@@ -18,6 +18,12 @@ Stack* initStack(){
     return s;
 }
 
+int isEmpty(Stack* S){
+    if(S->top == -1){
+        return 1;
+    }
+    return 0;
+}
 void push(Stack* S,Elementype e){
     //check the length's legal
     if(S->top >= MAXSIEZE - 1){
