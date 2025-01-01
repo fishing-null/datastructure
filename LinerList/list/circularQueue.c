@@ -9,6 +9,7 @@ typedef struct Node{
 }Node;
 
 typedef struct Queue{
+    // 通过头指针和尾指针来保存队头和队尾的位置
     Node *front;
     Node *rear;
 }Queue;
@@ -27,7 +28,9 @@ void eQueue(Queue *q,ElementType e){
     Node *cur = (Node *)malloc(sizeof(Node));
     cur -> data = e;
     cur -> next = NULL;
+    // 将新的节点插入到rear的后面
     q -> rear -> next = cur;
+    // 更新尾指针的位置
     q -> rear = cur;
 }
 
